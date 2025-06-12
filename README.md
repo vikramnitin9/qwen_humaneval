@@ -22,3 +22,12 @@ Then build and run our own Docker image:
 bash build.sh
 bash run.sh
 ```
+You should see output like this:
+```
+Task ID: HumanEval/0
+Generated response
+Task ID: HumanEval/1
+Generated response
+Task ID: HumanEval/2
+...
+```
