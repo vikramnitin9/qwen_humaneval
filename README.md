@@ -6,7 +6,7 @@ git submodule update --init --recursive
 docker build -f vllm/docker/Dockerfile.cpu --tag vllm-cpu-env --target vllm-openai ./vllm
 
 # Launch VLLM server
-$ docker run --rm \
+docker run --rm \
              --privileged=true \
              --shm-size=4g \
              -p 8000:8000 \
