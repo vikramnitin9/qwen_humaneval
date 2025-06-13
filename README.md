@@ -1,12 +1,12 @@
 # HumanEval Inference with Qwen
 
 First launch the dockerized vLLM server on CPU. Make sure that port 8000 on the host is available.
-```
+```bash
 bash run_vllm_cpu.sh
 ```
 
 Then build and run our own Docker image for inference:
-```
+```bash
 bash build.sh
 bash run_inference.sh
 ```
@@ -20,7 +20,7 @@ Task ID: HumanEval/2
 ...
 ```
 Once this is done, run evaluation
-```
+```bash
 bash run_eval.sh
 ```
 You will see output like this:
