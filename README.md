@@ -1,26 +1,14 @@
 # HumanEval Inference with Qwen
 
-First launch the vLLM server:
+First launch the dockerized vLLM server on CPU. Make sure that port 8000 on the host is available.
 ```
-git submodule update --init --recursive
-docker build -f vllm/docker/Dockerfile.cpu --tag vllm-cpu-env --target vllm-openai ./vllm
-
-# Launch VLLM server
-docker run --rm \
-             --privileged=true \
-             --shm-size=4g \
-             -p 8000:8000 \
-             -e VLLM_CPU_KVCACHE_SPACE=<KV cache space> \
-             -e VLLM_CPU_OMP_THREADS_BIND=<CPU cores for inference> \
-             vllm-cpu-env \
-             --model=Qwen/Qwen2.5-Coder-0.5B-Instruct \
-             --dtype=bfloat16
+bash run_vllm_cpu.sh
 ```
 
-Then build and run our own Docker image:
+Then build and run our own Docker image for inference:
 ```
 bash build.sh
-bash run.sh
+bash run_inference.sh
 ```
 You should see output like this:
 ```
@@ -30,4 +18,20 @@ Task ID: HumanEval/1
 Generated response
 Task ID: HumanEval/2
 ...
+```
+Once this is done, run evaluation
+```
+bash run_eval.sh
+```
+You will see output like this:
+```
+Evaluating task HumanEval/0...
+Evaluating task HumanEval/1...
+Evaluating task HumanEval/2...
+Evaluating task HumanEval/3...
+```
+Finally, it reports the success rate:
+```
+Evaluation completed. Successful tasks: 90/164
+Success rate: 54.88%
 ```

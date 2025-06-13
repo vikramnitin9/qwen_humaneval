@@ -13,6 +13,7 @@ def generate(messages):
                         "model": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
                         "messages": messages,
                         "temperature": 0.1,
+                        "max_tokens": 2048,
                     },
                     headers={
                         'content-type': 'application/json',
@@ -23,8 +24,7 @@ def generate(messages):
     
     return response.json()['choices'][0]['message']['content']
 
-output_file = "/output/samples.jsonl"
-errors_file = "/output/errors.jsonl"
+output_file = "/output/solutions.jsonl"
 
 for task_id in problems:
     print(f"Task ID: {task_id}")
@@ -47,24 +47,11 @@ Return just the program. Don't include any additional text or comments."""
         response = response[:-3]
     response = response.strip()
 
-    partial_code = problems[task_id]['prompt'].strip()
-    if response.startswith(partial_code):
-        response = response[len(partial_code):]
-    else:
-        print("Unable to generate completion")
-        completion = {
-            "task_id": task_id,
-            "completion": response
-        }
-        with open(errors_file, "a") as f:
-            f.write(json.dumps(completion) + "\n")
-        continue
-    
-    completion = {
+    solution = {
         "task_id": task_id,
-        "completion": response
+        "solution": response
     }
     with open(output_file, "a") as f:
-        f.write(json.dumps(completion) + "\n")
+        f.write(json.dumps(solution) + "\n")
     print(f"Generated response")
     

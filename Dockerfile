@@ -49,5 +49,6 @@ RUN git clone https://github.com/openai/human-eval
 RUN pip install -e human-eval
 RUN pip install requests
 
-COPY --chown=${USER_ID}:${GROUP_ID} run_eval.py /app/run_eval.py
-CMD ["python", "run_eval.py"]
+COPY --chown=${USER_ID}:${GROUP_ID} proj/ /app/proj/
+COPY --chown=${USER_ID}:${GROUP_ID} eval.py /app/eval.py
+COPY --chown=${USER_ID}:${GROUP_ID} inference.py /app/inference.py
