@@ -1,5 +1,7 @@
 # HumanEval Inference with Qwen
 
+## Instructions to Reproduce
+
 First launch the dockerized vLLM server on CPU. Make sure that port 8000 on the host is available.
 ```bash
 bash run_vllm_cpu.sh
@@ -35,3 +37,9 @@ Finally, it reports the success rate:
 Evaluation completed. Successful tasks: 90/164
 Success rate: 54.88%
 ```
+
+## Questions to answer:
+
+**1. How can we improve the HumanEval’s metric?**
+   
+**2. How can we enhance the performance of the inference and evaluation processes? How can we scale this evaluation process and make it run faster?**
