@@ -21,7 +21,7 @@ Generated response
 Task ID: HumanEval/2
 ...
 ```
-Once this is done, run evaluation
+The solutions will be written to `output/solutions.jsonl`. Once this is done, run evaluation
 ```bash
 bash run_eval.sh
 ```
@@ -32,7 +32,7 @@ Evaluating task HumanEval/1...
 Evaluating task HumanEval/2...
 Evaluating task HumanEval/3...
 ```
-Finally, it reports the success rate:
+The results will be written to `output/results.jsonl`. Finally, it reports the success rate:
 ```
 Evaluation completed. Successful tasks: 90/164
 Success rate: 54.88%
