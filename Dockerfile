@@ -12,8 +12,11 @@ ARG USER_ID
 ARG GROUP_ID
 RUN if ! getent group ${GROUP_ID}; then \
     groupadd -g ${GROUP_ID} appuser; \
-    fi && \
-    useradd -m -u ${USER_ID} -g ${GROUP_ID} appuser
+    fi
+
+RUN if ! getent passwd ${USER_ID}; then \
+    useradd -m -u ${USER_ID} -g ${GROUP_ID} appuser; \
+    fi
 
 RUN mkdir -p /opt/miniconda3 && \
     chown -R ${USER_ID}:${GROUP_ID} /opt/miniconda3
@@ -23,7 +26,7 @@ RUN mkdir -p /app && \
     chown -R ${USER_ID}:${GROUP_ID} /app
 
 # Switch to the non-root user
-USER appuser
+USER ${USER_ID}:${GROUP_ID}
 WORKDIR /app
 
 ENV PATH="/opt/miniconda3/bin:${PATH}"
